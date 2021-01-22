@@ -23,20 +23,19 @@ package modelo;
 public class ListaOrdenada {
 
     // Campos (Atributos)
-    private int[] datos;
+    private double[] datos;
     private int n; // Tamaño de la lista
 
     // Métodos (Operaciones)
     public ListaOrdenada() {
-        datos = new int[1];
+        datos = new double[1];
         n = 0;
     }
 
-    public void agregar(int dato) {
+    public void agregar(double dato) {
         if (datos.length == n) {
             cambiarCapacidad(2 * n);
         }
-        // Calculamos la posición del último elemento de la lista
         int i = n - 1;
 
         while (i >= 0 && dato < datos[i]) {
@@ -50,7 +49,7 @@ public class ListaOrdenada {
 
     private void cambiarCapacidad(int nc) {
         if (nc > 0 && nc >= n) {
-            int[] nuevoVector = new int[nc];
+            double[] nuevoVector = new double[nc];
 
             for (int i = 0; i < n; i++) {
                 nuevoVector[i] = datos[i];
@@ -64,10 +63,10 @@ public class ListaOrdenada {
         String cadena = "";
 
         if (n > 0) {
-            for (int i = 0; i < n - 1; i++) {
-                cadena += datos[i] + ", ";
+            cadena += datos[0];
+            for (int i = 1; i < n; i++) {
+                cadena += ", " + datos[i];
             }
-            cadena += datos[n - 1];
         }
         return "[" + cadena + "]";
     }
