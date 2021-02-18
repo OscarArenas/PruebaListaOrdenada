@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2019 Oscar Arenas
+ * Copyright (C) 2020 Oscar Arenas
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -58,15 +58,47 @@ public class ListaOrdenada {
         }
     }
 
+    /**
+     * Borra de la lista el valor ubicado en el índice especificado. El borrado
+     * se realiza desplazando todos los elementos que estan después del ubicado
+     * en el índice especificado una posición a la izquierda.
+     *
+     * @param indice Entero que indica la posición del valor a borrar
+     * @return Retorna true si elimina el valor y false en caso contrario
+     */
+    public boolean eliminar(int indice) {
+        if (indice >= 0 && indice < n) {
+            n--;
+            while (indice < n) {
+                datos[indice] = datos[indice + 1];
+                indice++;
+            }
+            if (datos.length / 4 == n) {
+                cambiarCapacidad(datos.length / 2);
+            }
+            return true;
+        }
+        return false;
+    }
+
+    public int tamanio() {
+        return n;
+    }
+
+    public boolean esVacia() {
+        return n == 0;
+    }
+
     @Override
     public String toString() {
-        String cadena = "";
+        if (esVacia()) {
+            return "[]";
+        }
 
-        if (n > 0) {
-            cadena += datos[0];
-            for (int i = 1; i < n; i++) {
-                cadena += ", " + datos[i];
-            }
+        String cadena = datos[0] + "";
+
+        for (int i = 1; i < n; i++) {
+            cadena += ", " + datos[i];
         }
         return "[" + cadena + "]";
     }
